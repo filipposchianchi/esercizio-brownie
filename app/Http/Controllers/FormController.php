@@ -27,7 +27,7 @@ class FormController extends Controller
                  foreach($request->file('filename') as $image)
             {
         
-                $fileName = "img-".strtolower($image->getClientOriginalName());
+                $fileName = strtolower($image->getClientOriginalName());
                 $destinationPath = public_path().'/images/';
                 
                 $img = Image::make($image);
@@ -36,21 +36,16 @@ class FormController extends Controller
                 $watermark = Image::make('images/logo_brownie.png');
                 $img->insert($watermark, 'center');
                 $img->save($destinationPath.'/'.$fileName);
-                
+
                 $data[] = $img;  
             }
         }
 
-        $form= new Form();
-        $form->filename=json_encode($data);
-         
-        $form->save();
-
         if(count($data)> 1 ) {
-            return back()->with('success', 'Immagini salvata');
+            return back()->with('success', 'Immagini salvate');
         }
         else {
-            return back()->with('success', 'Immagine salvate'); 
+            return back()->with('success', 'Immagine salvata'); 
         }
     }
     
