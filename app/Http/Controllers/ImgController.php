@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Intervention\Image\ImageManagerStatic as Image;
 
 use Illuminate\Http\Request;
+use App\Img;
 use App\Form;
 
-class FormController extends Controller
+class ImgController extends Controller
 {
     public function create()
     {
@@ -37,6 +38,11 @@ class FormController extends Controller
                 $img->insert($watermark, 'center');
                 $img->save($destinationPath.'/'.$fileName);
 
+                $imgDb= new Img();
+                $imgDb->imagePath = $destinationPath.$fileName;
+
+                $imgDb->save();
+                
                 $data[] = $img;  
             }
         }

@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','FormController@create');
-Route::post('/','FormController@store')->name('form.create');
+Route::get('/','ImgController@create');
+Route::post('/','ImgController@store')->name('form.create');
